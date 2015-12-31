@@ -31,10 +31,10 @@ end
 
 def next_worker(current_worker, workers_scenarios_count, steps_per_worker)
   iterations = 0
-  current_worker = next_round_rubin(current_worker, workers_scenarios_count.size)
+  current_worker = next_round_robin(current_worker, workers_scenarios_count.size)
   while workers_scenarios_count[current_worker] > steps_per_worker and
       iterations <= workers_scenarios_count.size-1
-    current_worker = next_round_rubin(current_worker, workers_scenarios_count.size)
+    current_worker = next_round_robin(current_worker, workers_scenarios_count.size)
     iterations+=1
   end
 
@@ -44,7 +44,7 @@ def next_worker(current_worker, workers_scenarios_count, steps_per_worker)
   current_worker
 end
 
-def next_round_rubin(index, max_size)
+def next_round_robin(index, max_size)
   (index + 1) % max_size
 end
 
