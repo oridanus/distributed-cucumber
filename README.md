@@ -20,3 +20,7 @@ Next the Orchestrator will run the "workers" jobs T1, ..., Tn in parallel (using
 
 After all of the workers job done running, Orchestrator will call the "Joiner" job, which will take all the reports of the workers jobs and join them.
 
+### Splitter
+
+the splitter is using [add_workers_tags.rb](https://github.com/omyd/parallel-cucumber/blob/master/add_workers_tags.rb) ruby script
+
