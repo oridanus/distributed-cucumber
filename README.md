@@ -14,7 +14,7 @@ an example of jenkins jobs, splitting to 7 workers, will look like this:
 
 we have the "Orchestrator" which is the entry-point job.
 
-Orchestrator will call the "Splitter" job. the splitter does a little magic and divides the features files into slices, where each slice will get a cucumber tag running from @worker_1, @worker_2, ... , @worker_N .
+Orchestrator will call the "Splitter" job. the splitter does his little magic and divides the features files into slices, where each slice will get a cucumber tag running from @worker_1, @worker_2, ... , @worker_N .
 
 Next the Orchestrator will run the "workers" jobs T1, ..., Tn in parallel (using - [Build Flow Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Build+Flow+Plugin) )
 
