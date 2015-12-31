@@ -10,4 +10,4 @@ To run much faster - tests will be splitted using a simple setup as follows
 
 jenkins jobs, splitting to 7, will look like this:
 
-![jenkins.png]({{site.baseurl}}/jenkins.png)
+![]({{site.baseurl}}//jenkins.png)
