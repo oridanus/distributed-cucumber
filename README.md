@@ -29,5 +29,5 @@ the script gets as parameters:
 
 It uses dry-run to count how many scanrios we have in total (excluding @not_ready tag) 
 Then iterate over all the feature files, prepending tags, such as @worker_X, to the first line of each file.
-Using a round-robin manner, trying to balance the workers to have simillar amount of scenarios each.
+Using a round-robin algorithm, to balance the workers to have simillar amount of scenarios each.
 
