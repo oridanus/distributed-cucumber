@@ -23,5 +23,11 @@ After all of the workers jobs are done, Orchestrator will call the "Join" job, w
 ### Splitter
 
 the splitter is using [add_workers_tags.rb](https://github.com/omyd/parallel-cucumber/blob/master/add_workers_tags.rb) ruby script.
-the script gets as parameters
+the script gets as parameters:
+1. the root directory in which your features files are in
+2. number of workers
+
+it uses dry-run to count how many scanrios we have in total (excluding @not_ready tag) 
+Then iterate all the feature files, prepanding them tags, such as @worker_X, at the first line of the file, 
+in round-robin manner, trying to balance the workers to have simillar amount of scenarios each.
 
