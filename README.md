@@ -20,6 +20,12 @@ Next the Orchestrator will run the "workers" jobs - T1, ...,Tn in parallel (usin
 
 After all of the workers jobs are done, Orchestrator will call the "Join" job, which will take all the reports of the workers jobs and join them to the final report.
 
+### Prerequisite
+ 
+1. Jenkins installation with [Build Flow Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Build+Flow+Plugin)
+2. ruby installed
+3. 
+
 ### Splitter
 
 the splitter is using [split_to_workers.rb](https://github.com/omyd/parallel-cucumber/blob/master/split_to_workers.rb) ruby script.
@@ -29,5 +35,10 @@ the script gets as parameters:
 
 It uses dry-run to count how many scanrios we have in total (excluding @not_ready tag) 
 Then iterate over all the feature files, prepending tags, such as @worker_X, to the first line of each file.
-Using a round-robin algorithm, to balance the workers to have simillar amount of scenarios each.
+It uses a round-robin algorithm, to balance the workers to have simillar amount of scenarios each.
 
+Then pushes the resulting feature files with the tags to a temporary git branch, let's call it "parallel-branch"
+
+### Workers
+
+the workers will checkout out "parallel-branch" the run your 
