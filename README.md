@@ -22,7 +22,7 @@ After all of the workers jobs are done, Orchestrator will call the "Join" job, w
 
 ### Splitter
 
-the splitter is using [add_workers_tags.rb](https://github.com/omyd/parallel-cucumber/blob/master/add_workers_tags.rb) ruby script.
+the splitter is using [add_workers_tags.rb](https://github.com/omyd/parallel-cucumber/blob/master/split_to_workers.rb) ruby script.
 the script gets as parameters:
 1. the root directory in which your features files are located
 2. number of workers
