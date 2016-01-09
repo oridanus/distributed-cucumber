@@ -48,20 +48,28 @@ def next_round_robin(index, max_size)
   (index + 1) % max_size
 end
 
-workers_scenarios_count = Array.new(number_of_workers, 0)
+def count_scenarios(feature_file, cucumber_tags)
+  output = `cucumber #{feature_file} #{cucumber_tags} --dry-run`
+  get_number_of_scenarios_in_feature(output)
+end
 
-output = `cucumber --dry-run #{cucumber_tags_param} -r features #{dir}`
-total_number_of_scenarios = scenarios_from_scenarios_line(output.split(/\n+/)[-3])
+def features_files_to_scenarios_count(feature_files, cucumber_tags)
+  Hash[ *feature_files.collect { |feature_file| [ feature_file, count_scenarios(feature_file, cucumber_tags) ] }.flatten ]
+end
 
+def total_number_of_scenarios(features_files_to_scenarios_count)
+  features_files_to_scenarios_count.values.inject(:+)
+end
+
+feature_files = Find.find(dir).select { |file| file.end_with? 'feature' }
+features_files_to_scenarios_count = features_files_to_scenarios_count(feature_files, cucumber_tags_param)
+total_number_of_scenarios = total_number_of_scenarios(features_files_to_scenarios_count)
 scenarios_per_worker = (total_number_of_scenarios.to_f / number_of_workers).ceil
-
-feature_files = Find.find(dir).select { |file| file.end_with? 'feature'}
-
+workers_scenarios_count = Array.new(number_of_workers, 0)
 current_worker = 0
 
 feature_files.shuffle.each do |feature|
-  output = `cucumber #{feature} #{cucumber_tags_param} --dry-run`
-  scenarios = get_number_of_scenarios_in_feature(output)
+  scenarios = features_files_to_scenarios_count[feature]
   if scenarios > 0
     prepend_to_file(feature, "@worker_#{current_worker+1}")
     workers_scenarios_count[current_worker] += scenarios
