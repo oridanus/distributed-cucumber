@@ -24,7 +24,6 @@ After all of the workers jobs are done, Orchestrator will call the "Join" job, w
  
 1. Jenkins installation with [Build Flow Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Build+Flow+Plugin)
 2. ruby installed
-3. 
 
 ### Splitter
 
@@ -41,4 +40,4 @@ Then pushes the resulting feature files with the tags to a temporary git branch,
 
 ### Workers
 
-the workers will checkout out "parallel-branch" the run your 
+the workers will checkout out "parallel-branch" created in the splitter, then run your test suit, each with the corresponding tag
